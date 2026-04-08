@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <div id="boot-overlay" aria-live="polite">
+      <h1>My-OS</h1>
+      <p>Booting desktop…</p>
+    </div>
+
+    <main id="desktop" aria-label="My-OS desktop" class="desktop-hidden">
     <main id="desktop" aria-label="My-OS desktop">
       <section id="icons" aria-label="Desktop icons">
         <button class="desktop-icon" data-open="browser-window">🌐<span>Scramjet Browser</span></button>
@@ -25,11 +31,17 @@
           <input id="scramjet-url" placeholder="https://example.org" value="https://example.org" />
           <button id="open-scramjet-url">Open</button>
           <button id="open-scramjet-home">Scramjet Home</button>
+          <button id="focus-mode">Focus</button>
         </div>
         <iframe
           id="scramjet-frame"
           title="Scramjet browser frame"
           referrerpolicy="no-referrer"
+          loading="eager"
+        ></iframe>
+      </section>
+
+      <section class="window hidden" id="apps-window" aria-label="Applications window">
           loading="lazy"
         ></iframe>
       </section>
@@ -46,12 +58,14 @@
         </div>
       </section>
 
+      <section class="window hidden" id="about-window" aria-label="About My-OS">
       <section class="window" id="about-window" aria-label="About My-OS">
         <header class="window-titlebar">
           <h2>About My-OS</h2>
           <div><button class="win-btn" data-minimize="about-window">_</button></div>
         </header>
         <div class="window-content">
+          <p>Direct-to-desktop web OS shell with Scramjet browser first.</p>
           <p>My-OS is a hybrid concept:</p>
           <ul>
             <li>A Linux-based operating-system roadmap (docs + compatibility tooling).</li>
@@ -62,6 +76,7 @@
       </section>
     </main>
 
+    <footer id="taskbar" aria-label="Taskbar" class="desktop-hidden">
     <footer id="taskbar" aria-label="Taskbar">
       <button id="start-button">Start</button>
       <div id="running-apps"></div>

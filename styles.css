@@ -5,6 +5,30 @@
   --accent: #4fc3f7;
   --text: #0e1d2d;
 }
+* { box-sizing: border-box; font-family: Inter, Segoe UI, Arial, sans-serif; }
+body { margin: 0; min-height: 100vh; background: radial-gradient(circle at 20% 10%, #1f3d63, var(--bg)); color: #fff; }
+#boot-overlay {
+  position: fixed; inset: 0; display: grid; place-content: center; gap: 8px;
+  background: radial-gradient(circle at 50% 10%, #132b46, #050b14); z-index: 999;
+}
+#boot-overlay h1, #boot-overlay p { margin: 0; text-align: center; }
+.boot-hidden { display: none !important; }
+.desktop-hidden { display: none !important; }
+
+#desktop { min-height: calc(100vh - 48px); padding: 12px; position: relative; }
+#icons { display: grid; gap: 10px; width: 180px; }
+.desktop-icon {
+  display: flex; align-items: center; gap: 10px; padding: 8px;
+  border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.08);
+  color: #fff; border-radius: 8px; cursor: pointer;
+}
+.window {
+  position: absolute; top: 16px; left: 210px; width: calc(100% - 226px); height: calc(100% - 26px);
+  background: var(--window); color: var(--text); border-radius: 10px; overflow: hidden;
+  box-shadow: 0 12px 32px rgba(0,0,0,.35);
+}
+.window.hidden { display: none; }
+.window.focus-mode { top: 0; left: 0; width: 100%; height: calc(100% + 12px); border-radius: 0; }
 
 * { box-sizing: border-box; font-family: Inter, Segoe UI, Arial, sans-serif; }
 body {
@@ -31,6 +55,17 @@ body {
   margin: 0; padding: 8px 12px; background: var(--panel); color: #fff;
   display: flex; align-items: center; justify-content: space-between;
 }
+.window-titlebar h2 { margin: 0; font-size: 1rem; }
+.win-btn { border: 0; border-radius: 6px; padding: 4px 8px; cursor: pointer; }
+.window-content { padding: 10px; }
+.browser-controls { display: flex; gap: 8px; }
+.browser-controls input { flex: 1; padding: 8px; }
+#scramjet-frame { width: 100%; height: calc(100% - 44px); border: 0; }
+#taskbar {
+  height: 48px; background: rgba(11,21,32,.9); border-top: 1px solid rgba(255,255,255,.1);
+  display: flex; align-items: center; justify-content: space-between; padding: 0 10px;
+}
+#start-button { background: var(--accent); border: 0; border-radius: 8px; padding: 8px 12px; }
 .window-titlebar h2 { margin: 0; font-size: 1rem; font-weight: 600; }
 .win-btn { border: 0; border-radius: 6px; padding: 4px 8px; cursor: pointer; }
 .window-content { padding: 12px; }

@@ -2,6 +2,9 @@ const windows = [...document.querySelectorAll('.window')];
 const runningApps = document.getElementById('running-apps');
 const clock = document.getElementById('clock');
 const frame = document.getElementById('scramjet-frame');
+const desktop = document.getElementById('desktop');
+const taskbar = document.getElementById('taskbar');
+const bootOverlay = document.getElementById('boot-overlay');
 
 const SCRAMJET_HOME = 'https://scramjet.org';
 
@@ -39,6 +42,14 @@ document.getElementById('open-scramjet-home').addEventListener('click', () => {
 
 document.getElementById('open-scramjet-url').addEventListener('click', () => {
   const url = document.getElementById('scramjet-url').value.trim();
+  if (!/^https?:\/\//.test(url)) return alert('Use a full URL (http/https).');
+  frame.src = url;
+});
+
+document.getElementById('focus-mode').addEventListener('click', () => {
+  document.getElementById('browser-window').classList.toggle('focus-mode');
+});
+
   if (!/^https?:\/\//.test(url)) {
     alert('Please enter a full URL starting with http:// or https://');
     return;
@@ -52,6 +63,15 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
+function bootToDesktop() {
+  desktop.classList.remove('desktop-hidden');
+  taskbar.classList.remove('desktop-hidden');
+  bootOverlay.classList.add('boot-hidden');
+  showWindow('browser-window');
+  frame.src = SCRAMJET_HOME;
+}
+
+setTimeout(bootToDesktop, 700);
 // Default open apps
 showWindow('browser-window');
 hideWindow('apps-window');
