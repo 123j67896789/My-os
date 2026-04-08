@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My-OS Web Desktop</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="boot-overlay" aria-live="polite">
+      <h1>My-OS</h1>
+      <p>Booting desktop…</p>
+    </div>
+
+    <main id="desktop" aria-label="My-OS desktop" class="desktop-hidden">
+      <section id="icons" aria-label="Desktop icons">
+        <button class="desktop-icon" data-open="browser-window">🌐<span>Scramjet Browser</span></button>
+        <button class="desktop-icon" data-open="apps-window">🧩<span>Apps</span></button>
+        <button class="desktop-icon" data-open="about-window">ℹ️<span>About</span></button>
+      </section>
+
+      <section class="window" id="browser-window" aria-label="Scramjet browser app">
+        <header class="window-titlebar">
+          <h2>Scramjet Browser</h2>
+          <div>
+            <button class="win-btn" data-minimize="browser-window">_</button>
+          </div>
+        </header>
+        <div class="window-content browser-controls">
+          <input id="scramjet-url" placeholder="https://example.org" value="https://example.org" />
+          <button id="open-scramjet-url">Open</button>
+          <button id="open-scramjet-home">Scramjet Home</button>
+          <button id="focus-mode">Focus</button>
+        </div>
+        <iframe
+          id="scramjet-frame"
+          title="Scramjet browser frame"
+          referrerpolicy="no-referrer"
+          loading="eager"
+        ></iframe>
+      </section>
+
+      <section class="window hidden" id="apps-window" aria-label="Applications window">
+        <header class="window-titlebar">
+          <h2>Applications</h2>
+          <div><button class="win-btn" data-minimize="apps-window">_</button></div>
+        </header>
+        <div class="window-content">
+          <p><strong>Windows app compatibility:</strong> use <code>scripts/launch_windows_app.sh</code> on Linux.</p>
+          <p><strong>Games:</strong> the launcher auto-selects Wine or Proton.</p>
+          <p><strong>Web mode:</strong> this desktop runs as a static site compatible with GitHub Pages.</p>
+        </div>
+      </section>
+
+      <section class="window hidden" id="about-window" aria-label="About My-OS">
+        <header class="window-titlebar">
+          <h2>About My-OS</h2>
+          <div><button class="win-btn" data-minimize="about-window">_</button></div>
+        </header>
+        <div class="window-content">
+          <p>Direct-to-desktop web OS shell with Scramjet browser first.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer id="taskbar" aria-label="Taskbar" class="desktop-hidden">
+      <button id="start-button">Start</button>
+      <div id="running-apps"></div>
+      <span id="clock" aria-live="polite"></span>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
