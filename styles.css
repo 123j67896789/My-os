@@ -29,6 +29,28 @@ body { margin: 0; min-height: 100vh; background: radial-gradient(circle at 20% 1
 }
 .window.hidden { display: none; }
 .window.focus-mode { top: 0; left: 0; width: 100%; height: calc(100% + 12px); border-radius: 0; }
+
+* { box-sizing: border-box; font-family: Inter, Segoe UI, Arial, sans-serif; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at 20% 10%, #1f3d63, var(--bg));
+  color: white;
+}
+#desktop { min-height: calc(100vh - 48px); padding: 16px; position: relative; }
+#icons { display: grid; gap: 12px; width: 180px; }
+.desktop-icon {
+  display: flex; align-items: center; gap: 10px; padding: 8px;
+  border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.08);
+  color: white; border-radius: 8px; cursor: pointer;
+}
+.desktop-icon span { font-size: .95rem; }
+.window {
+  position: absolute; top: 64px; left: 220px; width: min(900px, calc(100% - 240px));
+  height: min(520px, calc(100% - 96px)); background: var(--window); color: var(--text);
+  border-radius: 10px; overflow: hidden; box-shadow: 0 12px 32px rgba(0,0,0,.35);
+}
+.window.hidden { display: none; }
 .window-titlebar {
   margin: 0; padding: 8px 12px; background: var(--panel); color: #fff;
   display: flex; align-items: center; justify-content: space-between;
@@ -44,5 +66,16 @@ body { margin: 0; min-height: 100vh; background: radial-gradient(circle at 20% 1
   display: flex; align-items: center; justify-content: space-between; padding: 0 10px;
 }
 #start-button { background: var(--accent); border: 0; border-radius: 8px; padding: 8px 12px; }
+.window-titlebar h2 { margin: 0; font-size: 1rem; font-weight: 600; }
+.win-btn { border: 0; border-radius: 6px; padding: 4px 8px; cursor: pointer; }
+.window-content { padding: 12px; }
+.browser-controls { display: flex; gap: 8px; }
+.browser-controls input { flex: 1; padding: 8px; }
+#scramjet-frame { width: 100%; height: calc(100% - 46px); border: 0; }
+#taskbar {
+  height: 48px; background: rgba(11,21,32,.88); border-top: 1px solid rgba(255,255,255,.1);
+  display: flex; align-items: center; justify-content: space-between; padding: 0 10px;
+}
+#start-button { background: var(--accent); border: 0; border-radius: 8px; padding: 8px 12px; cursor: pointer; }
 #running-apps { display: flex; gap: 8px; flex: 1; margin: 0 10px; }
 .task-pill { background: rgba(255,255,255,.15); border-radius: 8px; padding: 4px 8px; font-size: .85rem; }

@@ -1,68 +1,74 @@
 # Architecture Plan: "Windows-like but Better"
 
-## 1. Dual-delivery model
+## 1. Product goals
 
-My-OS now has two coordinated tracks:
+- Run a modern desktop UI with strong performance and security.
+- Support legacy and modern apps, including Windows `.exe` and common game engines.
+- Default privacy protections for users in surveillance-heavy environments.
 
-1. **Web Desktop Track (current runnable build):** a GitHub Pages-hosted desktop shell that boots directly to desktop with a Scramjet Browser app experience.
-2. **Native OS Track (long-term):** Linux-based operating system with strong compatibility and security.
-
-## 2. Web Desktop track (GitHub Pages)
-
-### Goals
-- Run instantly from static hosting.
-- Provide OS-like UX (desktop, taskbar, app windows).
-- Include a Scramjet-focused browser app entry point.
-
-### Constraints
-- Static pages cannot deliver full kernel or native driver control.
-- Browser sandbox limitations apply.
-
-## 3. Native OS track
+## 2. Core platform strategy
 
 ### Kernel and base system
-- Linux kernel for mature hardware compatibility.
-- Custom userland shell/compositor and system services.
-- Immutable signed A/B updates.
+- Start from Linux kernel for hardware compatibility and driver maturity.
+- Build a custom userland shell/compositor and system services.
+- Use immutable system partitions + signed updates (A/B updates).
 
 ### Desktop stack
-- Wayland compositor.
+- Wayland-based compositor.
 - GPU-accelerated UI toolkit.
-- Sandboxed app model.
+- Sandboxed app model by default.
 
 ### Security
 - Mandatory sandboxing for internet-facing apps.
-- Signed metadata + reproducible builds.
-- Clear runtime permissions.
+- Signed package metadata and reproducible builds.
+- Transparent permission prompts (camera, mic, files, network).
 
-## 4. Windows app and game compatibility
+## 3. Windows app and game compatibility
 
-- Wine for general `.exe` apps.
-- Proton + DXVK/VKD3D for game workloads.
-- Compatibility manager service:
+### Compatibility layers
+- Use Wine for general `.exe` compatibility.
+- Use Proton + DXVK/VKD3D for game compatibility.
+- Build a compatibility manager service:
   - per-app prefixes,
-  - runtime selection,
-  - app-specific DLL/registry templates.
+  - automatic runtime selection,
+  - registry and DLL override templates.
 
-## 5. Scramjet browser direction
+### Game support details
+- Prefer Vulkan path through DXVK/VKD3D.
+- Integrate anti-cheat status checks and known-issues database.
+- Add launcher profiles (FPS mode, latency mode, battery mode).
 
-- Treat Scramjet as the default browser app slot in the web desktop.
-- Long term: integrate privacy controls, anti-fingerprinting defaults, and hardened proxy chain workflows.
+## 4. Privacy browser for surveillance states
 
-## 6. Delivery phases
+### Design principles
+- Default to proxy chain support (SOCKS5/HTTP upstream).
+- Strip high-entropy headers and isolate cookie jars.
+- Enforce HTTPS where possible.
+- Disable WebRTC local IP leakage by default.
+
+### Threat model assumptions
+- ISP-level metadata collection.
+- State DNS tampering/blocking.
+- Network logging and selective censorship.
+
+### Hardening roadmap
+1. Multi-hop transport support.
+2. Domain fronting alternatives where legal and viable.
+3. Pluggable transport obfuscation.
+4. Censorship-resilient update channels.
+
+## 5. Delivery phases
 
 ### Phase 0 (current)
-- GitHub Pages web desktop
-- Scramjet app shell
-- Wine/Proton launcher script
+- Architecture, launcher script, privacy proxy starter.
 
 ### Phase 1
-- Installer ISO prototype
-- Native shell + settings panel
+- Installer ISO prototype.
+- Basic desktop shell and app store.
 
 ### Phase 2
-- Compatibility control center for Windows apps/games
-- Telemetry-free diagnostics
+- Compatibility control panel for `.exe` and games.
+- Telemetry-free crash reporting.
 
 ### Phase 3
-- LTS release channels and hardware certification
+- Stable release with LTS channel.

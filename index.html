@@ -13,6 +13,7 @@
     </div>
 
     <main id="desktop" aria-label="My-OS desktop" class="desktop-hidden">
+    <main id="desktop" aria-label="My-OS desktop">
       <section id="icons" aria-label="Desktop icons">
         <button class="desktop-icon" data-open="browser-window">🌐<span>Scramjet Browser</span></button>
         <button class="desktop-icon" data-open="apps-window">🧩<span>Apps</span></button>
@@ -41,6 +42,11 @@
       </section>
 
       <section class="window hidden" id="apps-window" aria-label="Applications window">
+          loading="lazy"
+        ></iframe>
+      </section>
+
+      <section class="window" id="apps-window" aria-label="Applications window">
         <header class="window-titlebar">
           <h2>Applications</h2>
           <div><button class="win-btn" data-minimize="apps-window">_</button></div>
@@ -53,17 +59,25 @@
       </section>
 
       <section class="window hidden" id="about-window" aria-label="About My-OS">
+      <section class="window" id="about-window" aria-label="About My-OS">
         <header class="window-titlebar">
           <h2>About My-OS</h2>
           <div><button class="win-btn" data-minimize="about-window">_</button></div>
         </header>
         <div class="window-content">
           <p>Direct-to-desktop web OS shell with Scramjet browser first.</p>
+          <p>My-OS is a hybrid concept:</p>
+          <ul>
+            <li>A Linux-based operating-system roadmap (docs + compatibility tooling).</li>
+            <li>A browser-delivered desktop shell for instant access on GitHub Pages.</li>
+            <li>A Scramjet-focused browser app slot for privacy-first browsing workflows.</li>
+          </ul>
         </div>
       </section>
     </main>
 
     <footer id="taskbar" aria-label="Taskbar" class="desktop-hidden">
+    <footer id="taskbar" aria-label="Taskbar">
       <button id="start-button">Start</button>
       <div id="running-apps"></div>
       <span id="clock" aria-live="polite"></span>

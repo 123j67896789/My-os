@@ -50,6 +50,13 @@ document.getElementById('focus-mode').addEventListener('click', () => {
   document.getElementById('browser-window').classList.toggle('focus-mode');
 });
 
+  if (!/^https?:\/\//.test(url)) {
+    alert('Please enter a full URL starting with http:// or https://');
+    return;
+  }
+  frame.src = url;
+});
+
 function updateClock() {
   clock.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
@@ -65,3 +72,8 @@ function bootToDesktop() {
 }
 
 setTimeout(bootToDesktop, 700);
+// Default open apps
+showWindow('browser-window');
+hideWindow('apps-window');
+hideWindow('about-window');
+frame.src = SCRAMJET_HOME;
